@@ -1,0 +1,249 @@
+input_column_count: 14
+output_columns:
+  - column: "顧客ID"
+    position: 1
+    default:
+  - column: "データ作成日時"
+    position: 2
+    default:
+  - column: "データ更新日時"
+    position: 3
+    default:
+  - column: "データ論理削除フラグ"
+    position: 4
+    default: "0"
+  - column: "顧客区分"
+    position: 5
+    default: "2"
+  - column: "顧客区分名"
+    position: 6
+    default: "契約者"
+  - column: "顧客番号"
+    position: 7
+    default:
+  - column: "顧客名称"
+    position: 8
+    default:
+  - column: "顧客名称カナ"
+    position: 9
+    default:
+  - column: "法人区分"
+    position: 10
+    default:
+  - column: "法人区分名"
+    position: 11
+    default:
+  - column: "基本住所　TEL"
+    position: 12
+    default:
+  - column: "基本住所　携帯TEL"
+    position: 13
+    default:
+  - column: "性別区分"
+    position: 14
+    default:
+  - column: "性別区分名"
+    position: 15
+    default:
+  - column: "生年月日"
+    position: 15
+    default:
+  - column: "国籍"
+    position: 17
+    default:
+  - column: "職業CD"
+    position: 18
+    default:
+  - column: "職業名"
+    position: 19
+    default:
+  - column: "年収"
+    position: 20
+    default:
+  - column: "勤務先名"
+    position: 21
+    default:
+  - column: "勤務先TEL"
+    position: 22
+    default:
+  - column: "緊急連絡先　宛名"
+    position: 23
+    default:
+  - column: "緊急連絡先　TEL"
+    position: 24
+    default:
+  - column: "緊急連絡先　携帯TEL"
+    position: 25
+    default:
+  - column: "任意項目1"
+    position: 26
+    default:
+  - column: "任意項目2"
+    position: 27
+    default:
+  - column: "任意項目3"
+    position: 28
+    default:
+
+calculation:
+  - key: "[入居者]入居者顧客コード"
+    rule: direct
+    value-name: 顧客ID
+
+  - key: "[入居者]入居者顧客コード"
+    rule: direct
+    value-name: 顧客番号
+
+  - key: "[入居者]入居者名"
+    rule: direct
+    value-name: 顧客名称
+
+  - key: "[入居者]入居者名カナ"
+    rule: direct
+    value-name: 顧客名称カナ
+
+  - key: "[入居者]<連絡先>電話番号"
+    rule: direct
+    value-name: 基本住所　TEL
+
+  - key: "[入居者]<連絡先>携帯番号"
+    rule: direct
+    value-name: 基本住所　携帯TEL
+
+  - key: "[入居者]生年月日"
+    rule: custom
+    code-name:
+    value-name: 生年月日
+
+  - key: "[入居者]国籍"
+    rule: direct
+    code-name:
+    value-name: 国籍
+
+  - key: "[入居者]法人区分"
+    rule: conditional
+    code-name: 法人区分
+    value-name: 法人区分名
+    pattern:
+      - case: 個人
+        operand: "="
+        then:
+          code: 0
+          value: 個人
+      - case: 法人
+        operand: "="
+        then:
+          code: 1
+          value: 法人
+      - else:
+          code: 2
+          value: 指定なし
+
+  - key: "[入居者]性別"
+    rule: conditional
+    code-name: 性別区分
+    value-name: 性別区分名
+    pattern:
+      - case: 男
+        operand: "="
+        then:
+          code: 1
+          value: 男性
+      - case: 女
+        operand: "="
+        then:
+          code: 2
+          value: 女性
+      - case: 未決定
+        operand: "="
+        then:
+          code: 0
+          value: 指定なし
+      - else:
+          code: 0
+          value: 指定なし
+
+  - key: "[契約者]契約者顧客コード"
+    rule: direct
+    value-name: 顧客ID
+
+  - key: "[契約者]契約者顧客コード"
+    rule: direct
+    value-name: 顧客番号
+
+  - key: "[契約者]契約者名"
+    rule: direct
+    value-name: 顧客名称
+
+  - key: "[契約者]契約者名カナ"
+    rule: direct
+    value-name: 顧客名称カナ
+
+  - key: "[契約者]電話番号"
+    rule: direct
+    value-name: 基本住所　TEL
+
+  - key: "[契約者]携帯番号"
+    rule: direct
+    value-name: 基本住所　携帯TEL
+
+  - key: "[契約者]生年月日"
+    rule: custom
+    code-name:
+    value-name: 生年月日
+
+  - key: "[契約者]国籍"
+    rule: direct
+    code-name:
+    value-name: 国籍
+
+  - key: "[契約者]法人区分"
+    rule: conditional
+    code-name: 法人区分
+    value-name: 法人区分名
+    pattern:
+      - case: 個人
+        operand: "="
+        then:
+          code: 0
+          value: 個人
+      - case: 法人
+        operand: "="
+        then:
+          code: 1
+          value: 法人
+      - else:
+          code: 2
+          value: 指定なし
+
+  - key: "[契約者]性別"
+    rule: conditional
+    code-name: 性別区分
+    value-name: 性別区分名
+    pattern:
+      - case: 男
+        operand: "="
+        then:
+          code: 1
+          value: 男性
+      - case: 女
+        operand: "="
+        then:
+          code: 2
+          value: 女性
+      - case: 未決定
+        operand: "="
+        then:
+          code: 0
+          value: 指定なし
+      - else:
+          code: 0
+          value: 指定なし
+
+ignore:
+  - key: "[入居者]入居者顧客コード"
+    values:
+      - value:
+  - key: "[契約者]契約者顧客コード"
+    values:
+      - value:
