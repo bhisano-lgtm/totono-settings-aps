@@ -1,0 +1,94 @@
+input_column_count:
+output_columns:
+  - column: "月次賃料ID"
+    position: 1
+    default:
+  - column: "契約ID"
+    position: 2
+    default:
+  - column: "データ作成日時"
+    position: 3
+    default:
+  - column: "データ更新日時"
+    position: 4
+    default:
+  - column: "データ論理削除フラグ"
+    position: 5
+    default: "0"
+  - column: "賃料項目CD"
+    position: 6
+    default:
+  - column: "賃料項目名"
+    position: 7
+    default:
+  - column: "本体額"
+    position: 8
+    default:
+  - column: "税額"
+    position: 9
+    default:
+  - column: "税区分"
+    position: 10
+    default:
+  - column: "合算金額"
+    position: 11
+    default:
+  - column: "内税区分"
+    position: 12
+    default:
+  - column: "隔月フラグ"
+    position: 13
+    default: "0"
+
+calculation:
+  - key: "部屋CD"
+    rule: custom
+    value-name: 月次賃料ID
+
+  - key: "賃貸借契約NO"
+    rule: concat
+    value-name: 契約ID
+    value: ${賃貸借契約NO}R${入居者CD}
+
+  - key: "科目CD"
+    rule: direct
+    value-name: 賃料項目CD
+
+  - key: "科目名"
+    rule: direct
+    value-name: 賃料項目名
+
+  - key: "請求額"
+    rule: direct
+    value-name: 本体額
+
+  - key: "請求税額"
+    rule: direct
+    value-name: 税額
+
+  - key: "税区分"
+    rule: conditional
+    code-name: 税区分
+    value-name:
+    pattern:
+      - case: 2
+        operand: "="
+        then:
+          code: 1
+          value: 課税
+      - case: 1
+        operand: "="
+        then:
+          code: 0
+          value: 非課税
+      - else:
+          code: 2
+          value: 対象外
+
+ignore:
+  - key: "部屋CD"
+    values:
+      - value:
+  - key: "賃貸借契約NO"
+    values:
+      - value:
