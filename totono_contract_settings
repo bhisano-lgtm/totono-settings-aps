@@ -1,0 +1,408 @@
+input_column_count: 33
+output_columns:
+  - column: "契約ID"
+    position: 1
+    default:
+  - column: "部屋ID"
+    position: 2
+    default:
+  - column: "データ作成日時"
+    position: 3
+    default:
+  - column: "データ更新日時"
+    position: 4
+    default:
+  - column: "データ論理削除フラグ"
+    position: 5
+    default: "0"
+  - column: "契約者　顧客ID"
+    position: 6
+    default:
+  - column: "契約者　顧客名"
+    position: 7
+    default:
+  - column: "入居者　顧客ID"
+    position: 8
+    default:
+  - column: "入居者　顧客名"
+    position: 9
+    default:
+  - column: "入居者　続柄CD"
+    position: 10
+    default:
+  - column: "入居者　続柄名"
+    position: 11
+    default:
+  - column: "保証人1　顧客ID"
+    position: 12
+    default:  ""
+  - column: "保証人1　顧客名"
+    position: 13
+    default:  ""
+  - column: "保証人1　続柄CD"
+    position: 14
+    default:  ""
+  - column: "保証人1　続柄名"
+    position: 15
+    default: 
+  - column: "保証人2　顧客ID"
+    position: 16
+    default:  ""
+  - column: "保証人2　顧客名"
+    position: 17
+    default:  ""
+  - column: "保証人2　続柄CD"
+    position: 18
+    default:  ""
+  - column: "保証人2　続柄名"
+    position: 19
+    default: 
+  - column: "契約状況"
+    position: 20
+    default:
+  - column: "契約状況名"
+    position: 21
+    default:
+  - column: "契約日"
+    position: 22
+    default:
+  - column: "入居日"
+    position: 23
+    default:
+  - column: "契約開始日"
+    position: 24
+    default:
+  - column: "契約終了日"
+    position: 25
+    default:
+  - column: "自動更新フラグ"
+    position: 26
+    default:
+  - column: "更新期間（年）"
+    position: 27
+    default:
+  - column: "更新通知日区分"
+    position: 28
+    default:
+
+  - column: "更新通知日区分名"
+    position: 29
+    default:
+
+  - column: "更新通知日"
+    position: 30
+    default:
+
+  - column: "定期借家フラグ"
+    position: 31
+    default:
+
+  - column: "退去予告日区分"
+    position: 32
+    default:
+
+  - column: "退去予告日区分名"
+    position: 33
+    default:
+
+  - column: "退去予告日"
+    position: 34
+    default:
+
+  - column: "契約書記載　支払方法"
+    position: 35
+    default:
+
+  - column: "契約書記載　支払期日"
+    position: 36
+    default:
+
+  - column: "任意項目1"
+    position: 37
+    default:
+
+  - column: "任意項目2"
+    position: 38
+    default:
+
+  - column: "任意項目3"
+    position: 39
+    default:
+
+  - column: "会員フラグ１"
+    position: 40
+    default:
+
+  - column: "会員フラグ１　種別CD"
+    position: 41
+    default:
+
+  - column: "会員フラグ１　種別名"
+    position: 42
+    default:
+
+  - column: "会員フラグ2"
+    position: 43
+    default:
+
+  - column: "会員フラグ2　種別CD"
+    position: 44
+    default:
+
+  - column: "会員フラグ2　種別名"
+    position: 45
+    default:
+
+  - column: "保証契約　保証会社　顧客ID"
+    position: 46
+    default:
+
+  - column: "保証契約　保証会社　顧客名"
+    position: 47
+    default:    
+
+calculation:
+  - key: "賃貸借契約NO"
+    rule: concat
+    value-name: 契約ID
+    value: ${賃貸借契約NO}R${入居者CD}
+
+  - key: "部屋CD"
+    rule: custom
+    value-name: 部屋ID
+
+  - key: "契約者CD"
+    rule: direct
+    value-name: 契約者　顧客ID
+
+  - key: "契約者名"
+    rule: direct
+    value-name: 契約者　顧客名
+
+  - key: "入居者CD"
+    rule: direct
+    value-name: 入居者　顧客ID
+
+  - key: "入居者名"
+    rule: direct
+    value-name: 入居者　顧客名
+
+  - key: "入居者_続柄"
+    rule: automatic-pair
+    code-name: 入居者　続柄CD
+    value-name: 入居者　続柄名
+
+  - key: "連帯保証人1_続柄"
+    rule: automatic-pair
+    code-name: 保証人1　続柄CD
+    value-name: 保証人1　続柄名
+
+  - key: "連帯保証人2_続柄"
+    rule: automatic-pair
+    code-name: 保証人2　続柄CD
+    value-name: 保証人2　続柄名
+
+  - key: "賃借ステータス名"
+    rule: conditional
+    code-name: 契約状況
+    value-name: 契約状況名
+    pattern:
+      - case: 契約処理中
+        operand: "="
+        then:
+          code: 1
+          value: 申込
+      - case: 申込キャンセル
+        operand: "="
+        then:
+          code: 99
+          value: キャンセル
+      - case: 入居中
+        operand: "="
+        then:
+          code: 2
+          value: 契約中
+      - case: 更新処理中
+        operand: "="
+        then:
+          code: 2
+          value: 契約中
+      - case: 更新処理中(更新キャンセル)
+        operand: "="
+        then:
+          code: 2
+          value: 契約中
+      - case: 更新キャンセル
+        operand: "="
+        then:
+          code: 2
+          value: 契約中
+      - case: 退去処理中(更新キャンセル)
+        operand: "="
+        then:
+          code: 2
+          value: 契約中
+      - case: 退去処理中
+        operand: "="
+        then:
+          code: 3
+          value: 解約予定
+      - case: 解約済
+        operand: "="
+        then:
+          code: 4
+          value: 解約完了
+      - case: 解約済(更新キャンセル)
+        operand: "="
+        then:
+          code: 4
+          value: 解約完了
+      - case: 管理対象外(申込キャンセル)
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(入居中)
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(更新キャンセル)
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(解約済)
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(解約済(更新キャンセル))
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(解約済(期間満了))
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - case: 管理対象外(期間満了)
+        operand: "="
+        then:
+          code: 0
+          value: 未設定
+      - else:
+          code: 0
+          value: 未設定
+
+  - key: "初回契約開始日"
+    rule: custom
+    value-name: 契約日
+
+  - key: "初回契約開始日"
+    rule: custom
+    value-name: 入居日
+
+  - key: "契約開始日"
+    rule: custom
+    value-name: 契約開始日
+
+  - key: "契約終了日"
+    rule: custom
+    value-name: 契約終了日
+
+  - key: "自動更新区分名"
+    rule: conditional
+    code-name: 自動更新フラグ
+    value-name:
+    pattern:
+      - case: あり
+        operand: "="
+        then:
+          code: 1
+          value: 対象
+      - case: なし
+        operand: "="
+        then:
+          code: 0
+          value: 対象外
+      - else:
+          code: 0
+          value: 対象外
+
+  - key: "退去申出期限区分"
+    rule: conditional
+    code-name: 退去予告日区分
+    value-name:
+    pattern:
+      - case: 2
+        operand: "="
+        then:
+          code: 1
+          value:
+      - else:
+          code: 0
+          value:
+
+  - key: "退去申出期限区分名"
+    rule: direct
+    value-name: 退去予告日区分名
+
+  - key: "退去申出期限月数"
+    rule: direct
+    value-name: 退去予告日
+
+  - key: "保証会社名"
+    rule: direct
+    value-name: 保証契約　保証会社　顧客名
+
+ignore:
+  - key: "賃貸借契約NO"
+    values:
+      - value:
+  - key: "部屋CD"
+    values:
+      - value:
+  - key: "初回契約開始日"
+    values:
+      - value:
+  - key: "契約者CD"
+    values:
+      - value:
+  - key: "入居者CD"
+    values:
+      - value:
+  - key: "契約開始日"
+    values:
+      - value:
+  - key: "契約終了日"
+    values:
+      - value:
+  - key: "契約終了日"
+    values:
+      - value:
+  - key: "賃借ステータス名"
+    values:
+      - value: "管理対象外(解約済(期間満了))"
+  - key: "賃借ステータス名"
+    values:
+      - value: "管理対象外(期間満了)"
+  - key: "賃借ステータス名"
+    values:
+      - value: "更新処理中(期間満了)"
+  - key: "賃借ステータス名"
+    values:
+      - value: "退去処理中(期間満了)"
+  - key: "賃借ステータス名"
+    values:
+      - value: "解約済(期間満了)"
+  - key: "賃借ステータス名"
+    values:
+      - value: "期間満了"
+  - key: "賃借ステータス名"
+    values:
+      - value: "更新処理中(更新待ち)"
+  - key: "賃借ステータス名"
+    values:
+      - value: "退去処理中(更新待ち)"
