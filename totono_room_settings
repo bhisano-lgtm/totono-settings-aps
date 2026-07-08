@@ -1,0 +1,153 @@
+input_column_count: 12
+output_columns:
+  - column: "部屋ID"
+    position: 1
+    default:
+  - column: "建物ID"
+    position: 2
+    default:
+  - column: "データ作成日時"
+    position: 3
+    default:
+  - column: "データ更新日時"
+    position: 4
+    default:
+  - column: "データ論理削除フラグ"
+    position: 5
+    default: "0"
+  - column: "部屋番号"
+    position: 6
+    default:
+  - column: "所属階CD"
+    position: 7
+    default: "3"
+  - column: "所属階名"
+    position: 8
+    default: "地上"
+  - column: "所属階"
+    position: 9
+    default:
+  - column: "間取り"
+    position: 10
+    default:
+  - column: "間取りCD"
+    position: 11
+    default:
+  - column: "間取り名"
+    position: 12
+    default:
+  - column: "専有面積（㎡）"
+    position: 13
+    default:
+  - column: "種別CD"
+    position: 14
+    default:
+  - column: "種別名"
+    position: 15
+    default:
+  - column: "種別詳細CD"
+    position: 16
+    default:
+  - column: "種別詳細名"
+    position: 17
+    default:
+  - column: "部屋向きCD"
+    position: 18
+    default:
+  - column: "部屋向き名"
+    position: 19
+    default:
+  - column: "メールボックス番号"
+    position: 20
+    default:
+  - column: "システム区分"
+    position: 21
+    default:
+  - column: "任意項目1"
+    position: 22
+    default:
+  - column: "任意項目2"
+    position: 23
+    default:
+  - column: "任意項目3"
+    position: 24
+    default:
+
+calculation:
+  - key: "部屋コード"
+    rule: custom
+    value-name: 部屋ID
+
+  - key: "部屋名"
+    rule: direct
+    value-name: 部屋番号
+
+  - key: "建物コード"
+    rule: direct
+    value-name: 建物ID
+
+  - key: "階"
+    rule: direct
+    value-name: 所属階
+
+  - key: "間取"
+    rule: direct
+    value-name: 間取り名
+
+  - key: "間取コード"
+    rule: direct
+    value-name: 間取りCD
+
+  - key: "専有面積"
+    rule: direct
+    value-name: 専有面積（㎡）
+
+  - key: "部屋用途名"
+    rule: automatic-pair
+    code-name: 種別CD
+    value-name: 種別名
+
+  - key: "部屋用途名"
+    rule: conditional
+    code-name: システム区分
+    value-name:
+    pattern:
+      - case: その他
+        operand: "="
+        then:
+          code: 0
+          value: 指定なし
+      - case: 事務所
+        operand: "="
+        then:
+          code: 2
+          value: 事業
+      - case: 住居
+        operand: "="
+        then:
+          code: 1
+          value: 住居
+      - case: 特殊物件
+        operand: "="
+        then:
+          code: 0
+          value: 指定なし
+      - case: 店舗
+        operand: "="
+        then:
+          code: 2
+          value: 事業
+      - else:
+          code: 0
+          value:
+
+ignore:
+  - key: "部屋名"
+    values:
+      - value:
+  - key: "部屋コード"
+    values:
+      - value:
+  - key: "管理契約NO"
+    values:
+      - value:
