@@ -1,0 +1,253 @@
+input_column_count: 21
+output_columns:
+  - column: "建物ID"
+    position: 1
+    default:
+  - column: "同一建物ID"
+    position: 2
+    default:
+  - column: "データ作成日時"
+    position: 3
+    default:
+  - column: "データ更新日時"
+    position: 4
+    default:
+  - column: "データ論理削除フラグ"
+    position: 5
+    default: "0"
+  - column: "建物番号"
+    position: 6
+    default:
+  - column: "建物名称"
+    position: 7
+    default:
+  - column: "建物名称カナ"
+    position: 8
+    default:
+  - column: "築年月"
+    position: 9
+    default:
+  - column: "地上階数"
+    position: 10
+    default:
+  - column: "地下階数"
+    position: 11
+    default:
+  - column: "種別CD"
+    position: 12
+    default:
+  - column: "種別名"
+    position: 13
+    default:
+  - column: "種別詳細CD"
+    position: 14
+    default:
+  - column: "種別詳細名"
+    position: 15
+    default:
+  - column: "建物構造CD"
+    position: 16
+    default:
+  - column: "建物構造名"
+    position: 17
+    default:
+  - column: "所在地（郵便番号）"
+    position: 18
+    default:
+  - column: "所在地（都道府県CD）"
+    position: 19
+    default:
+  - column: "所在地（都道府県）"
+    position: 20
+    default:
+  - column: "所在地（市区町村CD）"
+    position: 21
+    default:
+  - column: "所在地（市区町村）"
+    position: 22
+    default:
+  - column: "所在地（町名CD）"
+    position: 23
+    default:
+  - column: "所在地（町名）"
+    position: 24
+    default:
+  - column: "所在地（丁目）"
+    position: 25
+    default:
+  - column: "所在地（番地）"
+    position: 26
+    default:
+  - column: "総戸数"
+    position: 27
+    default:
+  - column: "管理情報　管理切れフラグ"
+    position: 28
+    default: "0"
+  - column: "管理区分"
+    position: 29
+    default:
+  - column: "管理区分名"
+    position: 30
+    default:
+  - column: "管理形態"
+    position: 31
+    default:
+  - column: "管理形態名"
+    position: 32
+    default:
+  - column: "任意項目1"
+    position: 33
+    default:
+  - column: "任意項目2"
+    position: 34
+    default:
+  - column: "任意項目3"
+    position: 35
+    default:
+  - column: "管理情報　管理パターンCD"
+    position: 36
+    default:
+  - column: "管理情報　管理パターン名称"
+    position: 37
+    default:
+  - column: "管理情報　処理グループCD"
+    position: 38
+    default:
+  - column: "管理情報　処理グループ名称"
+    position: 39
+    default:
+  - column: "取扱店舗CD"
+    position: 40
+    default:
+  - column: "取扱店舗名称"
+    position: 41
+    default:
+  - column: "担当社員１CD"
+    position: 42
+    default:
+  - column: "担当社員１名"
+    position: 43
+    default:
+  - column: "担当社員２CD"
+    position: 44
+    default:
+  - column: "担当社員２名"
+    position: 45
+    default:
+  - column: "担当社員3CD"
+    position: 46
+    default:
+  - column: "担当社員3名"
+    position: 47
+    default:
+  - column: "公共(電気)　連絡先名"
+    position: 48
+    default:
+  - column: "公共(電気)　連絡先TEL"
+    position: 49
+    default:
+  - column: "公共(飲料水)　連絡先顧客名	"
+    position: 50
+    default:
+  - column: "公共(飲料水)　連絡先TEL	"
+    position: 51
+    default:
+  - column: "公共(排水)　連絡先顧客名"
+    position: 52
+    default:
+  - column: "公共(排水)　連絡先TEL"
+    position: 53
+    default:
+  - column: "公共(ガス)　連絡先顧客名	"
+    position: 54
+    default:
+  - column: "公共(ガス)　連絡先TEL"
+    position: 55
+    default:
+  - column: "公共(給湯)　連絡先顧客名"
+    position: 56
+    default:
+  - column: "公共(給湯)　連絡先TEL	"
+    position: 57
+    default:
+
+calculation:
+  - key: "建物コード"
+    rule: direct
+    value-name: 建物ID
+
+  - key: "建物コード"
+    rule: direct
+    value-name: 同一建物ID
+
+  - key: "建物コード"
+    rule: direct
+    value-name: 建物番号
+
+  - key: "建物名"
+    rule: direct
+    value-name: 建物名称
+
+  - key: "建物名カナ"
+    rule: direct
+    value-name: 建物名称カナ
+
+  - key: "建物種別"
+    rule: direct
+    value-name: 種別詳細CD
+
+  - key: "建物種別名"
+    rule: direct
+    value-name: 種別詳細名
+
+  - key: "構造種別"
+    rule: direct
+    value-name: 建物構造CD
+
+  - key: "構造種別名"
+    rule: direct
+    value-name: 建物構造名
+
+  - key: "郵便番号"
+    rule: direct
+    value-name: 所在地（郵便番号）
+
+  - key: "物件住所１"
+    rule: direct
+    value-name: 所在地（市区町村）
+
+  - key: "物件住所２"
+    rule: direct
+    value-name: 所在地（町名）
+
+  - key: "総戸数"
+    rule: direct
+    value-name: 総戸数
+
+  - key: "[管理契約]管理形態"
+    rule: conditional
+    code-name: 管理区分
+    value-name: 管理区分名
+    pattern:
+      - case: 一般
+        operand: "="
+        then:
+          code: 2
+          value: 一般
+      - case: 一括借上
+        operand: "="
+        then:
+          code: 4
+          value: サブリース
+      - else:
+          code: 0
+          value:
+
+ignore:
+  - key: "管理契約NO"
+    values:
+      - value:
+  - key: "建物コード"
+    values:
+      - value:
